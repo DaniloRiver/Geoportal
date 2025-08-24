@@ -1,5 +1,10 @@
 # Geoportal
 
+![License](https://img.shields.io/badge/license-MIT-green)
+![Python](https://img.shields.io/badge/python-3.11-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.100.0-green)
+![Angular](https://img.shields.io/badge/Angular-16-red)
+
 **Geoportal** es una plataforma web interactiva desarrollada con tecnologías modernas para la visualización y gestión de datos geoespaciales. El proyecto integra un frontend en Angular, un backend en FastAPI y un servidor de mapas con GeoServer.
 
 ## 🚀 Tecnologías utilizadas
