@@ -1,0 +1,46 @@
+services:
+  postgis:
+    image: postgis/postgis:15-3.3
+    container_name: postgis
+    restart: always
+    environment:
+      POSTGRES_DB: gisdb
+      POSTGRES_USER: gisuser
+      POSTGRES_PASSWORD: secret123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgis_data:/var/lib/postgresql/data
+
+  geoserver:
+    image: kartoza/geoserver:latest
+    container_name: geoserver
+    restart: always
+    environment:
+      GEOSERVER_ADMIN_USER: admin
+      GEOSERVER_ADMIN_PASSWORD: geoserver
+      JAVA_OPTS: "-Dfile.encoding=UTF-8"
+    ports:
+      - "8080:8080"
+    volumes:
+      - geoserver_data:/opt/geoserver/data_dir  # Este volumen persiste los datos
+    depends_on:
+      - postgis
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@danilo.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  postgis_data:
+  pgadmin_data:
+  geoserver_data:  # Definimos el volumen geoserver_data
+

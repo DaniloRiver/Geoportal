@@ -1,0 +1,60 @@
+/leafletClient
+
+# ==========================================
+# Gitignore para proyectos FastAPI en Python
+# ==========================================
+
+# Archivos de entorno
+.env
+.env.local
+*.env
+
+# Carpetas de entornos virtuales
+venv/
+.venv/
+
+# Archivos de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+*.db
+*.sqlite3
+
+# Archivos de configuración de editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos de logs
+*.log
+
+# Archivos de compilación/paquetes
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Archivos de cobertura y pruebas
+.coverage
+htmlcov/
+.tox/
+.pytest_cache/
+.mypy_cache/
+
+# Archivos temporales del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Docker
+*.pid
+docker-compose.override.yml
+
+# Archivos de Jupyter
+.ipynb_checkpoints/
+
+# Cache de pip
+pip-log.txt
+pip-delete-this-directory.txt
