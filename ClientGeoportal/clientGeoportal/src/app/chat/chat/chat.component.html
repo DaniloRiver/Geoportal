@@ -1,0 +1,41 @@
+<!-- Botón flotante con ícono de robot -->
+<div class="chat-toggle-btn" (click)="toggleChat()">
+  <img src="assets/icons/chat-icon.png" alt="chatbot" class="chat-icon" />
+</div>
+
+<!-- Ventana de chat -->
+<div class="chat-window" *ngIf="isOpen">
+  <div class="chat-header">
+    <span>Chat con el GeoBot 🤖</span>
+    <button (click)="toggleChat()">✖</button>
+  </div>
+
+  <div class="chat-body" #chatBody>
+    <div *ngFor="let msg of messages"
+         [ngClass]="msg.from === 'user' ? 'user-message' : 'bot-message'"
+         class="chat-message">
+      <div class="message-text">{{ msg.text }}</div>
+      <div class="message-meta">
+        <span>{{ msg.time }}</span>
+        <span *ngIf="msg.from === 'user'" class="status">{{ msg.status }}</span>
+      </div>
+      <div *ngIf="msg.urls?.length" class="urls">
+      <div *ngFor="let url of msg.urls">
+    🔗 <a [href]="url" target="_blank" rel="noopener noreferrer">{{ url }}</a>
+      </div>
+</div>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-indicator">
+    Enviando...
+  </div>
+
+  <div class="chat-input">
+    <input [(ngModel)]="userMessage"
+           placeholder="Escribe tu mensaje..."
+           (keyup.enter)="sendMessage()"
+           [disabled]="isLoading" />
+    <button (click)="sendMessage()" [disabled]="isLoading">Enviar</button>
+  </div>
+</div>

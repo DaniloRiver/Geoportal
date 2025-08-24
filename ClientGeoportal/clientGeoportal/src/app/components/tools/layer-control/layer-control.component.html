@@ -1,0 +1,10 @@
+<div class="tool-box">
+  <h3>🗺 Control de capas</h3>
+  <ul>
+    <li *ngFor="let layer of layers">
+      <input type="checkbox" [checked]="layer.visible" (change)="toggleLayer(layer)" />
+      {{ layer.name }}
+    </li>
+  </ul>
+</div>
+

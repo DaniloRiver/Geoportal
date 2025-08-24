@@ -1,0 +1,16 @@
+<div class="weather-row">
+  <div *ngFor="let city of weatherData" class="weather-card">
+    <div class="card-header">
+      <h3>{{ city.name }}</h3>
+      <i [ngClass]="city.iconClass" class="weather-icon"></i>
+    </div>
+    <div class="card-temp">{{ city.temp }}°C</div>
+    <div class="card-info">
+  <div>💧 Humedad: {{ city.humidity }}%</div>
+  <div>🌫️ Visibilidad: {{ city.smoke }}</div>
+  <div>💨 Viento: {{ city.wind }} km/h</div>
+  <div>🧭 Presión: {{ city.pressure }} hPa</div>
+</div>
+
+  </div>
+</div>

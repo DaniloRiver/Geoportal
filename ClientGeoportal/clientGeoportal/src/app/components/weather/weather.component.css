@@ -1,0 +1,109 @@
+.weather-row {
+  display: flex;
+  flex-wrap: nowrap;         /* ❗ No permitir saltos de línea */
+  overflow-x: auto;          /* 👉 Habilita scroll horizontal */
+  gap: 20px;                 /* Espacio entre tarjetas */
+  padding: 20px;
+  margin: 0 auto;
+  scrollbar-width: thin;     /* Para Firefox */
+}
+
+.weather-row::-webkit-scrollbar {
+  height: 6px;               /* Scroll horizontal fino */
+}
+.weather-row::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.weather-card {
+  flex: 0 0 220px;           /* Tamaño fijo */
+  background-color: #ebe8e5; /* Beige */
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.weather-card:hover {
+  transform: scale(1.03);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.card-header h3 {
+  font-size: 1.1rem;
+  margin: 0;
+  color: #333;
+}
+
+.weather-icon {
+  font-size: 2.2rem;
+  color: #ff9900;
+}
+
+.card-temp {
+  font-size: 2rem;
+  margin: 10px 0;
+  font-weight: bold;
+  color: #222;
+}
+
+
+
+.card-info {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #444;
+}
+
+
+.card-info i {
+  margin-right: 8px;
+  color: #888;
+}
+
+.small-icon {
+  font-size: 1rem;
+}
+
+.weather-row {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE y Edge */
+  position: relative;
+  padding-bottom: 10px; /* para que no corte contenido */
+}
+
+.weather-row::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.weather-card {
+  flex: 0 0 200px; /* ancho fijo para forzar scroll si hay varias tarjetas */
+  margin-right: 10px;
+}
+
+/* Indicador visual de scroll */
+.weather-row::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.8), transparent);
+}
+
+
+

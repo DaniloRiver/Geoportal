@@ -1,0 +1,74 @@
+
+<app-navigation-tools></app-navigation-tools>
+
+<mat-toolbar color="primary">
+  <span>Mapas de Honduras</span>
+  <span class="spacer"></span>
+  <input matInput placeholder="Buscar..." [(ngModel)]="searchTerm" (input)="onSearch()">
+</mat-toolbar>
+
+<div class="main-container">
+  <div class="sidebar">
+    <h3>Filtros</h3>
+    <!-- <mat-checkbox *ngFor="let filter of filters" [(ngModel)]="filter.checked" (change)="applyFilters()">{{ filter.label }}</mat-checkbox> -->
+
+        <!-- Filtros por tags -->
+    <h4>Usos</h4>
+    <mat-checkbox *ngFor="let tag of tags" [checked]="selectedDepartments.includes(tag)"
+                  (change)="toggleDepartmentFilter(tag, $event.checked)">
+      {{ tag }}
+    </mat-checkbox>
+
+        <!-- Filtros por año -->
+    <h4>Años</h4>
+    <mat-checkbox *ngFor="let year of years" [checked]="selectedYears.includes(year)"
+                  (change)="toggleYearFilter(year, $event.checked)">
+      {{ year }}
+    </mat-checkbox>
+
+    <!-- Filtros por departamento -->
+    <h4>Departamentos</h4>
+    <mat-checkbox *ngFor="let dept of departments" [checked]="selectedDepartments.includes(dept)"
+                  (change)="toggleDepartmentFilter(dept, $event.checked)">
+      {{ dept }}
+    </mat-checkbox>
+
+  </div>
+
+  <div class="content">
+    <div class="sort-bar">
+      <mat-form-field appearance="fill">
+        <mat-label>Ordenar por</mat-label>
+        <mat-select [(value)]="sortBy" (selectionChange)="sortItems()">
+          <mat-option value="title">Título</mat-option>
+          <mat-option value="relevance">Relevancia</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="card-container">
+      <mat-card *ngFor="let item of pagedItems()" class="map-card">
+        <mat-card-header>
+          <mat-card-title>{{ item.title }}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src="assets/map-placeholder.png" alt="mapa">
+        <mat-card-content>
+          <p>{{ item.description }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-icon-button aria-label="Descargar">
+            <mat-icon>download</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+
+
+    <mat-paginator [length]="filteredItems.length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" (page)="onPageChange($event)"></mat-paginator>
+  </div>
+
+</div>
+
+
+

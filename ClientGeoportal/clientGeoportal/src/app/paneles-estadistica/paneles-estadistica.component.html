@@ -1,0 +1,78 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" opened class="sidenav">
+    <h2 class="sidebar-title">Estadísticas</h2>
+    <mat-nav-list>
+      <mat-list-item><mat-icon>dashboard</mat-icon> <span>Resumen</span></mat-list-item>
+      <mat-list-item><mat-icon>bar_chart</mat-icon> <span>Ventas</span></mat-list-item>
+      <mat-list-item><mat-icon>group</mat-icon> <span>Usuarios</span></mat-list-item>
+      <mat-list-item><mat-icon>insights</mat-icon> <span>Métricas</span></mat-list-item>
+      <mat-list-item><mat-icon>pie_chart</mat-icon> <span>Gráficas</span></mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- <div *ngIf="isLoading" class="spinner-overlay">
+  <mat-spinner></mat-spinner>
+  </div> -->
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="toolbar">
+      <button mat-icon-button (click)="sidenav.toggle()" class="toggle-btn">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Dashboard de Estadísticas</span>
+    </mat-toolbar>
+
+    <div class="dashboard-container">
+      <!-- Tarjetas -->
+      <div class="cards-grid">
+        <mat-card class="stat-card">
+          <mat-card-title>Usuarios</mat-card-title>
+          <mat-card-content>1,250</mat-card-content>
+        </mat-card>
+
+        <mat-card class="stat-card">
+          <mat-card-title>Visitas</mat-card-title>
+          <mat-card-content>8,742</mat-card-content>
+        </mat-card>
+
+        <mat-card class="stat-card">
+          <mat-card-title>Ventas</mat-card-title>
+          <mat-card-content>L. 95,000</mat-card-content>
+        </mat-card>
+      </div>
+
+      <!-- Gráficas -->
+      <div class="charts-grid">
+        <mat-card class="chart-card">
+          <mat-card-title>Rendimiento mensual</mat-card-title>
+          <mat-card-content><canvas id="lineChart"></canvas></mat-card-content>
+        </mat-card>
+
+        <mat-card class="chart-card">
+          <mat-card-title>Ventas por producto</mat-card-title>
+          <mat-card-content><canvas id="barChart"></canvas></mat-card-content>
+        </mat-card>
+
+        <mat-card class="chart-card">
+          <mat-card-title>Usuarios por tipo</mat-card-title>
+          <mat-card-content><canvas id="pieChart"></canvas></mat-card-content>
+        </mat-card>
+
+        <mat-card class="chart-card">
+          <mat-card-title>Distribución de ingresos</mat-card-title>
+          <mat-card-content><canvas id="doughnutChart"></canvas></mat-card-content>
+        </mat-card>
+
+        <mat-card class="chart-card">
+          <mat-card-title>Comparativa de métricas</mat-card-title>
+          <mat-card-content><canvas id="radarChart"></canvas></mat-card-content>
+        </mat-card>
+
+        <mat-card class="chart-card">
+          <mat-card-title>Popularidad por categoría</mat-card-title>
+          <mat-card-content><canvas id="polarChart"></canvas></mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

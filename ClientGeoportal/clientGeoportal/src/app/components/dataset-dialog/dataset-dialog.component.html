@@ -1,0 +1,51 @@
+<h2 mat-dialog-title class="dialog-title">🗂 Detalles del Dataset</h2>
+
+<mat-dialog-content class="dialog-content modern-layout" style="display: flex; gap: 1rem;">
+
+  <!-- Panel izquierdo con detalles -->
+  <div class="left-panel" style="flex: 1 1 50%;">
+    <mat-card class="dataset-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+      <mat-card-content>
+        <h3>{{ data.title }}</h3>
+        <p class="description">{{ data.description }}</p>
+        <div class="dataset-meta" style="font-size: 0.9rem; color: #555;">
+          <p><strong>Categoría:</strong> {{ data.category }}</p>
+          <p><strong>Departamento:</strong> {{ data.department }}</p>
+          <p><strong>Municipio:</strong> {{ data.municipality }}</p>
+          <p><strong>Fuente:</strong>
+            <a *ngIf="data.source" href="{{ data.source }}" target="_blank" rel="noopener noreferrer">
+              {{ data.source }}
+            </a>
+            <span *ngIf="!data.source">No disponible</span>
+          </p>
+          <p><strong>Frecuencia:</strong> {{ data.update_frequency }}</p>
+          <p><strong>Contacto:</strong> {{ data.contact }}</p>
+          <p><strong>Tipo de Geometría:</strong> {{ data.geometry_type }}</p>
+          <p><strong>Formatos:</strong> {{ data.formats }}</p>
+          <p><strong>Creación:</strong> {{ data.creation_date | date:'longDate' }}</p>
+          <p><strong>Año de Datos:</strong> {{ data.data_year }}</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Panel derecho con mapa -->
+  <div class="right-panel" style="flex: 1 1 50%; display: flex; flex-direction: column; align-items: center;">
+    <div class="map-preview" style="width: 100%; height: 100%; min-height: 300px; border: 1px solid #ccc; border-radius: 4px;">
+      <!-- Aquí se renderiza el mapa OpenLayers -->
+      <div id="map-dialog" class="dialog-map" style="width: 100%; height: 100%;"></div>
+    </div>
+  </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions class="dialog-actions" style="justify-content: flex-end; padding-top: 1rem;">
+  <div class="button-group" style="display: flex; gap: 1rem;">
+    <button mat-stroked-button color="primary" (click)="downloadDataset()">
+      <mat-icon>download</mat-icon> Descargar
+    </button>
+    <button mat-flat-button color="warn" (click)="closeDialog()">
+      <mat-icon>close</mat-icon> Cerrar
+    </button>
+  </div>
+</mat-dialog-actions>

@@ -1,0 +1,132 @@
+/* Botón flotante */
+.chat-toggle-btn {
+  position: fixed;
+  bottom: 90px;
+  right: 10px;
+  background-color: #25d366;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.chat-icon {
+  width: 32px;
+  height: 32px;
+}
+
+/* Ventana del chat */
+.chat-window {
+  position: fixed;
+  bottom: 150px;
+  right: 20px;
+  width: 320px;
+  height: 480px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+/* Encabezado */
+.chat-header {
+  background-color: #075e54;
+  color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Cuerpo del chat */
+.chat-body {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: #e5ddd5;
+}
+
+/* Burbujas de mensaje */
+.chat-message {
+  max-width: 80%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  position: relative;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.user-message {
+  align-self: flex-end;
+  background-color: #dcf8c6;
+  border-bottom-right-radius: 0;
+}
+
+.bot-message {
+  align-self: flex-start;
+  background-color: white;
+  border-bottom-left-radius: 0;
+}
+
+.message-meta {
+  font-size: 11px;
+  text-align: right;
+  margin-top: 2px;
+  color: #888;
+}
+
+.status {
+  margin-left: 4px;
+}
+
+/* Entrada de mensaje */
+.chat-input {
+  display: flex;
+  padding: 10px;
+  background-color: white;
+  border-top: 1px solid #ccc;
+}
+
+.chat-input input {
+  flex: 1;
+  border: none;
+  padding: 8px;
+  font-size: 14px;
+  outline: none;
+}
+
+.chat-input button {
+  background-color: #25d366;
+  border: none;
+  color: white;
+  padding: 0 16px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.urls {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+.urls a {
+  display: inline-block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+  color: #0077cc;
+  font-size: 0.9rem;
+}

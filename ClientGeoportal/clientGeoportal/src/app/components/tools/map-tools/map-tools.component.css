@@ -1,0 +1,48 @@
+.floating-toolbar {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 1000;
+}
+
+.fab {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #a58f6f;
+  color: white;
+  font-size: 1.25rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.fab:hover {
+  background-color: #8c7a5f;
+}
+
+.medicion-resultado {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 60, 136, 0.9);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 14px;
+  z-index: 999;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.medicion-resultado button {
+  margin-left: 10px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+

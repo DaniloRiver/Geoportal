@@ -1,0 +1,11 @@
+<div class="floating-toolbar">
+  <button class="fab" title="Medir distancia" (click)="activarMedicion.emit('line')">📏</button>
+  <button class="fab" title="Medir área" (click)="activarMedicion.emit('polygon')">📐</button>
+  <button class="fab" title="Descargar imagen" (click)="descargar.emit()">⬇️</button>
+  <button class="fab" title="Imprimir" (click)="imprimir.emit()">🖨️</button>
+  <button class="fab" title="Vista inicial" (click)="zoomInicio.emit()">📌</button>
+  <button class="fab" title="Cambiar mapa base" (click)="cambiarBase.emit()">🧭</button>
+  <button class="fab" title="Agregar marcador" (click)="agregarMarcador.emit()">📍</button>
+  <button class="fab" title="Compartir mapa" (click)="compartir.emit()">🔗</button>
+</div>
+

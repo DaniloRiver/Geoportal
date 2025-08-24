@@ -1,0 +1,146 @@
+<div class="geovisor-container" [class.sidebar-collapsed]="sidebarCollapsed">
+  <!-- Botón para colapsar/expandir sidebar -->
+  <button class="sidebar-toggle-button" (click)="toggleSidebar()">
+    {{ sidebarCollapsed ? '➡️' : '⬅️' }}
+  </button>
+  <!-- Panel lateral -->
+  <div class="sidebar" [class.collapsed]="sidebarCollapsed">
+
+    <!-- Modo oscuro -->
+    <section style="padding-bottom: 20px;">
+      <label class="theme-switch-label">
+        <span>🌓 Modo oscuro</span>
+        <label class="switch">
+          <input type="checkbox" [(ngModel)]="darkMode" (ngModelChange)="toggleDarkMode()" />
+          <span class="slider round"></span>
+        </label>
+      </label>
+    </section>
+
+    <!-- Pronóstico del clima -->
+    <section class="weather-section card mb-3">
+      <h4 class="section-title">🌤️ Pronóstico del clima</h4>
+      <app-weather-forecast></app-weather-forecast>
+    </section>
+
+    <hr />
+
+    <!-- Filtros -->
+    <section class="filters-section card mb-3">
+      <h4 class="section-title">🔍 Filtros</h4>
+
+      <div *ngIf="isLoading" class="loading-container">
+        <div class="spinner"></div>
+      </div>
+
+      <div *ngIf="!isLoading">
+        <div *ngFor="let ws of (allLayers | groupByWorkspace | keyvalue)">
+          <div class="workspace-group">
+            <button class="collapse-button" (click)="toggleCollapse(ws.key)">
+              {{ ws.key }}
+              <span>{{ collapsedStates[ws.key] ? '▶' : '▼' }}</span>
+            </button>
+
+            <div class="layer-group" *ngIf="!collapsedStates[ws.key]">
+              <div class="layer-item" *ngFor="let item of ws.value">
+                <label>
+                  <input type="checkbox" [checked]="item.layer.getVisible()"
+                    (change)="toggleLayer(item.layer, $event)" />
+                  {{ item.title }}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr />
+
+    <!-- Capa base -->
+    <section class="base-layer-section card mb-3">
+      <h4 class="section-title">🗺️ Capa base</h4>
+      <select id="baseLayerSelect" [(ngModel)]="baseLayerSelected" (change)="setBaseLayer(baseLayerSelected)"
+        class="form-select">
+        <option value="OSM">OpenStreetMap</option>
+        <option value="Esri">Esri World Imagery</option>
+        <option value="Mapbox">Mapbox Streets</option>
+        <option value="Google">Google Maps</option>
+      </select>
+    </section>
+
+    <hr />
+
+    <!-- Leyenda dinámica usando Angular Material -->
+    <mat-expansion-panel [expanded]="true"  class="legend-section mb-3">
+      <mat-expansion-panel-header>
+        <mat-panel-title>🧭Leyenda del Mapa</mat-panel-title>
+        <mat-panel-description>
+          {{ showLegend ? 'Ocultar' : 'Mostrar' }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div *ngIf="getVisibleLegends().length > 0; else sinLeyendas">
+        <mat-card *ngFor="let legend of getVisibleLegends()" class="legend-card mat-elevation-z2 mb-2">
+          <mat-card-title>{{ legend.title }}</mat-card-title>
+          <mat-card-content>
+            <img
+              [src]="legend.url"
+              [alt]="'Leyenda de ' + legend.title"
+              style="max-width: 100%; height: auto;" />
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <ng-template #sinLeyendas>
+        <p style="padding: 1rem;">No hay capas visibles con leyenda.</p>
+      </ng-template>
+    </mat-expansion-panel>
+
+    <hr />
+  </div>
+
+  <app-map-tools
+      (activarMedicion)="activarMedicion($event)"
+      (descargar)="descargarMapa()"
+      (imprimir)="imprimirMapa()"
+      (zoomInicio)="centrarVistaInicial()"
+      (agregarMarcador)="agregarMarcador()"
+  ></app-map-tools>
+
+
+<div *ngIf="popupData" class="popup-card">
+  <button class="popup-close" (click)="cerrarPopup()">×</button>
+
+  <mat-card class="popup-inner-card">
+    <mat-card-title>Información del Punto</mat-card-title>
+
+    <mat-card-content>
+      <ng-container *ngIf="!popupData.message && !popupData.error; else mensaje">
+        <div *ngFor="let key of popupData | keyvalue">
+          <strong>{{ key.key }}:</strong> {{ key.value }}
+        </div>
+      </ng-container>
+
+      <ng-template #mensaje>
+        {{ popupData.message || popupData.error }}
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+  <!-- Contenedor del mapa -->
+  <div id="map" class="map-container" [class.dark-mode]="darkMode"></div>
+
+</div>
+<div class="medicion-bar" *ngIf="medicionResultado">
+  {{ medicionResultado }}
+</div>
+
+<div class="map-bottom-bar" *ngIf="medicionResultado || mouseCoords">
+  <span class="coordenadas" *ngIf="mouseCoords">{{ mouseCoords }}</span>
+  <span class="medicion" *ngIf="medicionResultado">{{ medicionResultado }}</span>
+  <button class="btn-limpiar" (click)="borrarMediciones()" *ngIf="medicionResultado">✖ Limpiar</button>
+</div>
+
+

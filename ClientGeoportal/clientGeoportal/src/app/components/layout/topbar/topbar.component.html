@@ -1,0 +1,55 @@
+<mat-toolbar class="mat-elevation-z4 custom-toolbar" color="primary">
+
+  <!-- Logo y nombre como enlace -->
+  <a routerLink="/" class="logo-section">
+    <img src="assets/icons/geoLogo.png" alt="Logo" class="logo" />
+    <span class="brand" fxHide.lt-md>GeoHonduras</span>
+  </a>
+
+  <span class="spacer"></span>
+
+  <!-- Links visibles solo en pantallas grandes -->
+  <div class="nav-links" fxHide.lt-md>
+    <a mat-button routerLink="/map" routerLinkActive="active">Mapas</a>
+    <a mat-button routerLink="/geovisor" routerLinkActive="active">Geovisor</a>
+    <a mat-button href="#">Documentos</a>
+    <a mat-button href="#">Paneles</a>
+    <a mat-button routerLink="/acerca" routerLinkActive="active">Acerca de</a>
+  </div>
+
+  <!-- Si no hay usuario (solo escritorio) -->
+  <ng-container *ngIf="!usuario; else perfil">
+    <div class="auth-buttons" fxHide.lt-md>
+      <button mat-stroked-button color="accent">Iniciar Sesión</button>
+      <button mat-flat-button color="accent">Registrarse</button>
+    </div>
+  </ng-container>
+
+  <!-- Si hay usuario (foto de perfil) -->
+  <ng-template #perfil>
+    <button mat-icon-button [matMenuTriggerFor]="perfilMenu">
+      <img [src]="usuario?.fotoUrl" alt="Foto de perfil" class="profile-img" />
+    </button>
+    <mat-menu #perfilMenu="matMenu">
+      <button mat-menu-item>Mi perfil</button>
+      <button mat-menu-item>Cerrar sesión</button>
+    </mat-menu>
+  </ng-template>
+
+  <!-- Botón de menú hamburguesa (solo móvil) -->
+  <button mat-icon-button [matMenuTriggerFor]="menu" fxShow.lt-md>
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/map">Mapas</button>
+    <button mat-menu-item routerLink="/geovisor">Geovisor</button>
+    <button mat-menu-item>Documentos</button>
+    <button mat-menu-item>Paneles</button>
+    <button mat-menu-item routerLink="/acerca">Acerca de</button>
+    <button mat-menu-item *ngIf="!usuario">Iniciar Sesión</button>
+    <button mat-menu-item *ngIf="!usuario">Registrarse</button>
+    <button mat-menu-item *ngIf="usuario">Cerrar sesión</button>
+  </mat-menu>
+
+</mat-toolbar>

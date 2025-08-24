@@ -1,0 +1,117 @@
+<app-navigation-tools></app-navigation-tools>
+
+<mat-toolbar class="custom-toolbar" color="primary" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+  <span class="toolbar-title" fxFlex.gt-sm="20%" fxFlex="100%">
+    Datasets de Honduras
+  </span>
+
+  <span class="spacer" fxFlex="1 1 auto"></span>
+
+  <div class="search-field-outline">
+    <mat-form-field appearance="outline" class="search-field-outline">
+      <mat-label>Buscar capas</mat-label>
+      <input matInput placeholder="Título o descripción" [(ngModel)]="searchTerm" (input)="onSearch()" />
+      <button mat-icon-button matSuffix *ngIf="searchTerm" (click)="searchTerm = ''; onSearch()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+  </div>
+
+  <button mat-stroked-button color="accent" class="reset-button" (click)="resetFilters()">
+    <mat-icon>restart_alt</mat-icon>
+    Resetear
+  </button>
+</mat-toolbar>
+
+<div fxLayout="row wrap" fxLayoutGap="24px" class="main-container" fxLayoutAlign="start stretch" style="padding: 16px">
+  <!-- Filtros -->
+  <div fxFlex="100%" fxFlex.gt-md="25%">
+    <mat-accordion class="filter-accordion" multi>
+      <!-- Usos -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>🟢 Usos</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div style="padding: 0 8px">
+          <mat-checkbox *ngFor="let tag of tags" [checked]="selectedTags.includes(tag)"
+            (change)="toggleTagFilter(tag, $event.checked)">
+            {{ tag }}
+          </mat-checkbox>
+        </div>
+      </mat-expansion-panel>
+
+      <!-- Años -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>🟦 Años</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div style="padding: 0 8px">
+          <mat-checkbox *ngFor="let year of years" [checked]="selectedYears.includes(year)"
+            (change)="toggleYearFilter(year, $event.checked)">
+            {{ year }}
+          </mat-checkbox>
+        </div>
+      </mat-expansion-panel>
+
+      <!-- Departamentos -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>🟣 Departamentos</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div style="padding: 0 8px">
+          <mat-checkbox *ngFor="let dept of departments" [checked]="selectedDepartments.includes(dept)"
+            (change)="toggleDepartmentFilter(dept, $event.checked)">
+            {{ dept }}
+          </mat-checkbox>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <!-- Contenido principal -->
+  <div fxFlex="100%" fxFlex.gt-md="70%" fxLayout="column" fxLayoutGap="16px">
+    <!-- Barra de ordenamiento -->
+    <div fxLayout="row" fxLayoutAlign="end center">
+      <mat-form-field appearance="fill" fxFlex="200px">
+        <mat-label>Ordenar por</mat-label>
+        <mat-select [(value)]="sortBy" (selectionChange)="sortItems()">
+          <mat-option value="title">Título</mat-option>
+          <mat-option value="relevance">Relevancia</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+ <!-- Tarjetas y paginador -->
+ <div class="card-container" fxLayout="column" fxLayoutGap="10px">
+  <div fxLayout="row wrap" fxLayoutGap="16px 16px">
+    <mat-card *ngFor="let item of pagedItems()" class="map-card" fxFlex="100%" fxFlex.gt-xs="48%" fxFlex.gt-md="23%"
+      (click)="openDialog(item)" style="cursor: pointer;">
+      <mat-card-header>
+        <mat-card-title>{{ item.title }}</mat-card-title>
+      </mat-card-header>
+
+      <img mat-card-image [src]="item.preview_image" alt="Vista previa de {{ item.title }}" />
+
+      <mat-card-content>
+        <div [class.collapsed]="!expanded[item.id]" class="description-text">
+          {{ item.description }}
+        </div>
+        <a (click)="toggleExpand(item.id.toString())" class="toggle-link">
+          {{ expanded[item.id] ? 'Leer menos' : 'Leer más' }}
+        </a>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-icon-button aria-label="Descargar" (click)="downloadDataset(item, $event)">
+          <mat-icon>download</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <!-- Paginador -->
+  <mat-paginator [length]="filteredItems.length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]"
+    (page)="onPageChange($event)">
+  </mat-paginator>
+</div>

@@ -1,0 +1,22 @@
+<div id="geoCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" *ngIf="images.length > 0">
+  <div class="carousel-inner">
+    <div
+      *ngFor="let image of images; let i = index"
+      class="carousel-item"
+      [class.active]="i === 0"
+    >
+      <img [src]="image.src" class="d-block w-100" [alt]="image.alt || 'Imagen del carrusel'">
+      <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3" *ngIf="image.title || image.description">
+        <h5 *ngIf="image.title">{{ image.title }}</h5>
+        <p *ngIf="image.description">{{ image.description }}</p>
+      </div>
+    </div>
+  </div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#geoCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#geoCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>

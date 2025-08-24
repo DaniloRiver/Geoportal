@@ -1,0 +1,27 @@
+<div class="sidebar">
+  <div class="tabs">
+    <button (click)="activeTab = 'layers'" [class.active]="activeTab === 'layers'">Capas</button>
+    <button (click)="activeTab = 'tools'" [class.active]="activeTab === 'tools'">Herramientas</button>
+  </div>
+
+  <div class="tab-content" *ngIf="activeTab === 'layers'">
+    <h3>Capas base</h3>
+    <!-- <select [(ngModel)]="baseLayerSelected" (change)="setBaseLayer(baseLayerSelected)">
+      <option value="OSM">OpenStreetMap</option>
+      <option value="Satellite">Satélite</option>
+    </select> -->
+
+    <h3>Capas temáticas</h3>
+    <label>
+      <input type="checkbox" [(ngModel)]="showBiodiversityLayer" (change)="toggleBiodiversityLayer()" />
+      Biodiversidad
+    </label>
+  </div>
+
+  <div class="tab-content" *ngIf="activeTab === 'tools'">
+    <button (click)="printMap()">Imprimir Mapa</button>
+    <!-- Agrega más herramientas como medir, buscar, etc. -->
+  </div>
+</div>
+
+<div id="map" class="map-container"></div>

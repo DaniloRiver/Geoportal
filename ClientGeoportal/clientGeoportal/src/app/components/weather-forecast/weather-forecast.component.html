@@ -1,0 +1,44 @@
+<div class="weather-forecast-container p-3 beige-background">
+  <label for="citySelector">Selecciona una ciudad:</label>
+  <select
+    id="citySelector"
+    class="form-select mb-3"
+    [(ngModel)]="selectedCity"
+    (change)="updateForecast()"
+  >
+    <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+  </select>
+
+  <label for="daySelector">Selecciona un día:</label>
+  <select
+    id="daySelector"
+    class="form-select mb-3"
+    [(ngModel)]="selectedDayIndex"
+  >
+    <option *ngFor="let day of forecastDays; let i = index" [value]="i">
+      {{ formatDate(day.date) }}
+    </option>
+  </select>
+
+  <div *ngIf="forecastDays.length > 0" class="forecast-details">
+    <div class="forecast-top" style="text-align: center; margin-bottom: 0.75rem;">
+      <img
+        [src]="iconUrl(forecastDays[selectedDayIndex].item.weather[0].icon)"
+        [alt]="forecastDays[selectedDayIndex].item.weather[0].description"
+        width="90"
+        height="90"
+      />
+      <div class="temperature-text" style="font-size: 1.5rem; color: #6b5847; font-weight: 700;">
+        {{ forecastDays[selectedDayIndex].item.main.temp | number: '1.0-0' }}°C
+      </div>
+    </div>
+
+    <div class="details-text forecast-bottom">
+      <h4>{{ formatDate(forecastDays[selectedDayIndex].date) }}</h4>
+      <p>💧 Humedad: {{ forecastDays[selectedDayIndex].item.main.humidity }}%</p>
+      <p>🧭 Presión: {{ forecastDays[selectedDayIndex].item.main.pressure }} hPa</p>
+      <p>💨 Viento: {{ forecastDays[selectedDayIndex].item.wind.speed }} m/s</p>
+      <p>🌤️ Descripción: {{ forecastDays[selectedDayIndex].item.weather[0].description }}</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.main-container {
+  display: flex;
+}
+
+.sidebar {
+  width: 250px;
+  padding: 1rem;
+}
+
+.content {
+  flex: 1;
+  padding: 1rem;
+}
+
+.sort-bar {
+  margin-bottom: 1rem;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.map-card {
+  width: 300px;
+}
+
+/* .mini-map {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  height: 200px;
+  width: 200px;
+  z-index: 1000;
+  border: 1px solid #ccc;
+} */
+
+mat-paginator {
+  margin-top: 2rem; 
+}

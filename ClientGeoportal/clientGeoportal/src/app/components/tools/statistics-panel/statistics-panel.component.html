@@ -1,0 +1,8 @@
+<div class="tool-box">
+  <h3>📊 Estadísticas</h3>
+  <ul>
+    <li *ngFor="let stat of stats">
+      {{ stat.label }}: <strong>{{ stat.value }}</strong>
+    </li>
+  </ul>
+</div>
